@@ -10,6 +10,15 @@ The finalized defense configurations are b1 and b2. They both share the same par
 There are 3 configurations, tb[1-3], which test the effect of randomizing the beta distribution. The shape of the beta distribution in tb1 is fully randomized and can skew to the extreme left and right. The shape of tb2 and tb3 are static; tb2 is skewed to the left and tb3 has the shape of a normal distribution.
 ### Padding Budget Testing
 There are 12 configurations, tp[1-12], which increment the padding budget at intervals of 250 from 250 to 3000.
+## Script Definitions
+### sim.sh
+This script simulates the BRO defense on previously collected traces.
+### bwoh.sh
+This script calculates the mean and median bandwidth overhead induced by the defense on the dataset. Bandwidth overhead of individual traces is calculated by taking the difference in length between a defended traces and the original, and dividing that by the length of the original trace.
+### loh.sh
+This script calculates the mean and median latency overhead induced by the defense on the dataset. The latency overhead of individual traces is calculated by taking the difference between the final timestamp of a defended trace and the original trace, and dividing by the original.
+### mkdfds.sh
+This script packs the dataset into .pkl files for use in testing against Deep Fingerprinting.
 ## Script Usage
 All scripts (sim.sh, bwoh.sh, loh.sh, and mkdfds.sh) are written in a way that enable simulating all configurations, the finalized defense configurations, testing configurations for tuning the defense grouped by type, and any comination of individual and/or any of the previously mentioned batched inputs. An example is given with the sim.sh script.
 ### All Configurations
