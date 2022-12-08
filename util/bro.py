@@ -5,8 +5,8 @@ import configparser
 import multiprocessing as mp
 import numpy as np 
 
-def load_trace(file):
-    return np.loadtxt(file, delimiter='\t')
+def load_trace(f):
+    return np.loadtxt(f, delimiter='\t')
 
 def dump_trace(trace, f):
     global defended
@@ -15,7 +15,7 @@ def dump_trace(trace, f):
             fp.write("{:.4f}\t{}\n".format(pkt[0], pkt[1]))
 
 def run_defense(f):
-    trace = load_trace(file)
+    trace = load_trace(f)
     trace = brain_surgery(trace)
     f = f.split('/')[-1]
     dump_trace(trace, f)
