@@ -1,7 +1,7 @@
 # Beta Randomized Obfuscation
 BRO is a zero-delay website fingerprinting defense. Traces are padded by sampling dummy packet timestamps from a randomized beta distribution scaled by a randomized padding window.
 ## Trace Collection
-Clone the [tor-capture](https://github.com/colmanmcguan/tor-capture) repository. Follow the instructions for setup and trace capture provided in the README. After collecting traces, move the ./tor-capture/log directory to ./bro
+Clone the [tor-capture](https://github.com/csmcguan/tor-capture) repository. Follow the instructions for setup and trace capture provided in the README. After collecting traces, move the ./tor-capture/log directory to ./bro
 ## Configurations
 The configurations and their parameters are listed in ./util/config.ini. They can be split into 3 categories.
 ### Finalized Defense
