@@ -37,7 +37,7 @@ if [ $# -ne 0 ]; then
 else
   for CONFIG in $B $STATS $TB $TP; do
     if [ -d $DEFENDED/$CONFIG ]; then
-      python3 ./util/bro.py $CONFIG >> bro.txt
+      python3 ./util/bro.py $CONFIG
     fi
   done
 fi
