@@ -21,6 +21,7 @@ def run_defense(f):
     dump_trace(trace, f)
 
 def get_injection():
+    global stats
     global client_max
     global server_max
     global client_min
@@ -49,8 +50,12 @@ def get_injection():
     server = np.random.beta(server_a, server_b, server_num) * server_win
     client = np.reshape(client, (len(client),1))
     server = np.reshape(server, (len(server),1))
-    client = np.concatenate((client, np.ones((len(client),1))), axis=1)
-    server = np.concatenate((server, -1*np.ones((len(server),1))), axis=1)
+    if stats:
+        client = np.concatenate((client, 777*np.ones((len(client),1))), axis=1)
+        server = np.concatenate((server, -777*np.ones((len(server),1))), axis=1)
+    else:
+        client = np.concatenate((client, np.ones((len(client),1))), axis=1)
+        server = np.concatenate((server, -1*np.ones((len(server),1))), axis=1)
 
     # merge back together
     injection = np.concatenate((client, server))
@@ -60,11 +65,21 @@ def get_injection():
 def brain_surgery(trace):
     injection = get_injection()
     last_pkt = trace[-1][0]
+
+    # real packets
     client_reals = trace[np.where(trace[:,1] == 1)]
     server_reals = trace[np.where(trace[:,1] == -1)]
-    client_dummys = injection[np.where(injection[:,1] == 1)]
+
+    # dummy packets
+    if stats:
+        client_dummys = injection[np.where(injection[:,1] == 777)]
+        server_dummys = injection[np.where(injection[:,1] == -777)]
+    else:
+        client_dummys = injection[np.where(injection[:,1] == 1)]
+        server_dummys = injection[np.where(injection[:,1] == -1)]
+
+    # cancel any dummy packets > last real packet
     client_dummys = client_dummys[np.where(client_dummys[:,0] <= last_pkt)]
-    server_dummys = injection[np.where(injection[:,1] == -1)]
     server_dummys[:,0] += server_reals[0][0]
     server_dummys = server_dummys[np.where(server_dummys[:,0] <= last_pkt)]
 
@@ -80,6 +95,7 @@ def parallel(flist, n_jobs=25):
 
 if __name__ == '__main__':
     # defense config/parameters
+    global stats
     global conf         # defense configuration
     global min_win      # minimum window size
     global max_win      # maximum window size
@@ -106,16 +122,17 @@ if __name__ == '__main__':
 
     config = dict(conf_parser._sections[conf])
 
-    client_min = int(config.get("client_min", 0))
-    client_max = int(config.get("client_max", 0))
-    server_min = int(config.get("server_min", 0))
-    server_max = int(config.get("server_max", 0))
-    min_win = float(config.get('min_win',14))
-    max_win = float(config.get('max_win',14))
-    a_min = float(config.get("a_min",0))
-    a_max = float(config.get("a_max",0))
-    b_min = float(config.get("b_min",0))
-    b_max = float(config.get("b_max",0))
+    stats       = bool(config.get("stats", False))
+    client_min  = int(config.get("client_min", 0))
+    client_max  = int(config.get("client_max", 0))
+    server_min  = int(config.get("server_min", 0))
+    server_max  = int(config.get("server_max", 0))
+    min_win     = float(config.get('min_win',14))
+    max_win     = float(config.get('max_win',14))
+    a_min       = float(config.get("a_min",0))
+    a_max       = float(config.get("a_max",0))
+    b_min       = float(config.get("b_min",0))
+    b_max       = float(config.get("b_max",0))
 
     # info
     print("parameters for {}".format(conf))
