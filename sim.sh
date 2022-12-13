@@ -36,8 +36,6 @@ if [ $# -ne 0 ]; then
   done
 else
   for CONFIG in $B $STATS $TB $TP; do
-    if [ -d $DEFENDED/$CONFIG ]; then
-      python3 ./util/bro.py $CONFIG
-    fi
+    python3 ./util/bro.py $CONFIG
   done
 fi
