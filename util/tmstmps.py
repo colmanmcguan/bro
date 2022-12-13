@@ -4,7 +4,7 @@ import multiprocessing as mp
 import numpy as np 
 
 def load_trace(f):
-    return np.loadtxt(file, delimiter="\t")
+    return np.loadtxt(f, delimiter="\t")
 
 def simulate(f):
     trace = load_trace(f)
@@ -29,8 +29,10 @@ if __name__ == '__main__':
     narr = []
     for a in arr:
         narr = narr + list(a)
-    rr = np.array(narr)
-    print("median timestamp: {}".format(np.median(arr)))
-    print("mean timestamp: {}".format(arr.mean()))
-    print("coef var: {}".format(arr.std() / arr.mean()))
-
+    arr = np.array(narr)
+    print("{} timestamps".format(sys.argv[1]))
+    print("================================")
+    print("median timestamp:\t{:.4f}".format(np.median(arr)))
+    print("mean timestamp:\t\t{:.4f}".format(arr.mean()))
+    print("coef. of var.:\t\t{:.4f}".format(arr.std() / arr.mean()))
+    print()

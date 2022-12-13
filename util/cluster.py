@@ -3,8 +3,8 @@ import sys
 import multiprocessing as mp
 import numpy as np 
 
-def load_trace(file):
-    return np.loadtxt(file, delimiter="\t")
+def load_trace(f):
+    return np.loadtxt(f, delimiter="\t")
 
 def simulate(f):
     trace = load_trace(f)
@@ -39,5 +39,10 @@ if __name__ == '__main__':
     arr = list(zip(*arr))
     arr = list(arr[0]) + list(arr[1])
     arr = np.array(arr)
-    print("mean: {}\nstd dev: {}\nmedian: {}".format(arr.mean(), arr.std(), np.median(arr)))
-    print("max: {}".format(arr.max()))
+    print("{} clustering".format(sys.argv[1]))
+    print("================================")
+    print("mean iqr:\t{:.4f}".format(arr.mean()))
+    print("median iqr:\t{:.4f}".format(np.median(arr)))
+    print("max iqr:\t{:.4f}".format(arr.max()))
+    print("std dev:\t{:.4f}".format(arr.std()))
+    print()
