@@ -18,6 +18,7 @@ if [ $# -ne 0 ]; then
         for CONFIG in $STATS; do
           python3 ./util/bro.py $CONFIG
         done
+	;;
       "tb")
         for CONFIG in $TB; do
           python3 ./util/bro.py $CONFIG

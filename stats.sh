@@ -34,4 +34,4 @@ else
       python3 ./util/cluster.py $CONFIG
     fi
   done
-  
+fi  
