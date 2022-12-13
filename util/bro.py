@@ -138,7 +138,7 @@ if __name__ == '__main__':
     print("parameters for {}".format(conf))
     print("================================")
     print("parameter\tvalue")
-    print("--------------------------------")
+    print("================================")
     print("client_min\t{}".format(client_min))
     print("client_max\t{}".format(client_max))
     print("server_min\t{}".format(server_min))
