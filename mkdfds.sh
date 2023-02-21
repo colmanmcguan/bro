@@ -17,12 +17,12 @@ if [ $# -ne 0 ]; then
         ;;
       "tb")
         for CONFIG in $TB; do
-          python3 ./util.mkdfds.py $DEFENDED/$CONFIG
+          python3 ./util/mkdfds.py $DEFENDED/$CONFIG
         done
         ;;
       "tp")
         for CONFIG in $TP; do
-          python3 ./util.mkdfds.py $DEFENDED/$CONFIG
+          python3 ./util/mkdfds.py $DEFENDED/$CONFIG
         done
         ;;
       *)
