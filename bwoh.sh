@@ -2,7 +2,7 @@
 
 DEFENDED=./defended
 B=$(seq -f "b%g" 1 2)
-TB=$(seq -f "tb%g" 1 3)
+TB=$(seq -f "tb%g" 1 5)
 TP=$(seq -f "tp%g" 1 12)
 
 if [ $# -ne 0 ]; then
