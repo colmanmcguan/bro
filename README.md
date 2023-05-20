@@ -17,10 +17,8 @@ This script simulates the BRO defense on previously collected traces.
 This script calculates the mean and median bandwidth overhead induced by the defense on the dataset. Bandwidth overhead of individual traces is calculated by taking the difference in length between a defended traces and the original, and dividing that by the length of the original trace.
 ### loh.sh
 This script calculates the mean and median latency overhead induced by the defense on the dataset. The latency overhead of individual traces is calculated by taking the difference between the final timestamp of a defended trace and the original trace, and dividing by the original.
-### mkdfds.sh
-This script packs the dataset into .pkl files for use in testing against Deep Fingerprinting.
 ## Script Usage
-All scripts (sim.sh, bwoh.sh, loh.sh, and mkdfds.sh) are written in a way that enable simulating all configurations, the finalized defense configurations, testing configurations for tuning the defense grouped by type, and any comination of individual and/or any of the previously mentioned batched inputs. An example is given with the sim.sh script.
+All scripts (sim.sh, bwoh.sh, and loh.sh) are written in a way that enable simulating all configurations, the finalized defense configurations, testing configurations for tuning the defense grouped by type, and any comination of individual and/or any of the previously mentioned batched inputs. An example is given with the sim.sh script.
 ### All Configurations
 When running all configurations, the bwoh.sh and loh.sh scripts log the results to bwoh.txt and loh.txt respectively.
 ```
@@ -42,6 +40,3 @@ bash sim.sh tp
 ```
 bash sim.sh <config1> <config2> ...
 ```
-**Note that mkdfds.sh requires the path to the trace directory for individual configurations**
-## Deep Fingerprinting
-The mkdfds.sh script will prepare a dataset for use in [Deep Fingerprinting](https://github.com/deep-fingerprinting/df) by creating a train, test, and validate .pkl files from the datasets.
